@@ -10,14 +10,14 @@ pipeline {
 
     stages{
         stage("Initialize Pipeline"){
-            script {
+            steps {
                 echo "Starting the Jenkins pipeline for eureka server"
                 echo "Fetching app version.."
             }
         }
 
         stage("Maven Build") {
-            script {
+            steps {
                 echo "Testing Jenkinsfile"
             }
         }
