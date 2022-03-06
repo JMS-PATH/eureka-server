@@ -1,5 +1,7 @@
 def version
-def dockerImg
+def dockerHubImg = "aswinrprasad/eureka"
+def dockerGitImg = "https://ghcr.io/JMS-PATH/eureka-server"
+def branchName = env.BRANCH_NAME
 
 pipeline {
     agent any
@@ -15,6 +17,17 @@ pipeline {
                 echo "Fetching app version.."
                 script{
                     version = readMavenPom().getVersion()
+                    mvnGoals = "clean install"
+                    if( branchName == "main" ) {
+                        version = version.replace("-SNAPSHOT", "")
+                        mvnGoals = "clean deploy versions:set -DremoveSnapshot=true"
+                    }
+                    else if (branchName ==~ "~/(hotfix|feature)\/\w/"){
+                        version = version+"-dev-hof"
+                    }
+                    else {
+                        version = version+"-dev"
+                    }
                 }
             }
         }
