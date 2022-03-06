@@ -18,7 +18,8 @@ pipeline {
 
         stage("Maven Build") {
             steps {
-                echo "Testing Jenkinsfile"
+                echo "Building Maven Project"
+                sh "mvn compile"
             }
         }
 
