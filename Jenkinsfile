@@ -22,7 +22,7 @@ pipeline {
                         version = version.replace("-SNAPSHOT", "")
                         mvnGoals = "clean deploy versions:set -DremoveSnapshot=true"
                     }
-                    else if (branchName ==~ "~/(hotfix|feature)\/\w/"){
+                    else if (branchName ==~ "~/(hotfix|feature)/\w/"){
                         version = version+"-dev-hof"
                     }
                     else {
