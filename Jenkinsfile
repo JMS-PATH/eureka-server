@@ -1,6 +1,6 @@
 def version
 def dockerHubImg = "aswinrprasad/eureka"
-def dockerGitImg = "https://ghcr.io/jms-path/eureka-server/eureka"
+def dockerGitImg = "ghcr.io/jms-path/eureka-server/eureka"
 def branchName = env.BRANCH_NAME
 
 pipeline {
