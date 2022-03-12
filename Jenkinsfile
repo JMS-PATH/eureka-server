@@ -64,7 +64,7 @@ pipeline {
                 echo "Scanning code quality with SonarQube"
                 script {
                     withSonarQubeEnv(credentialsId: 'sonarqube-credentials', installationName: 'sonar-scanner') {
-                        sh 'mvn sonar:sonar -Dsonar.projectName=${appName}'
+                        sh 'mvn sonar:sonar -Dsonar.projectName='+appName
                     }
                 }
             }
