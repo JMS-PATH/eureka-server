@@ -20,7 +20,7 @@ pipeline {
                     mvnGoals = "install"
                     if( branchName == "main" ) {
                         version = version.replace("-SNAPSHOT", "")
-                        mvnGoals = "versions:set -DremoveSnapshot=true deploy"
+                        mvnGoals = "versions:set -DremoveSnapshot deploy"
                     }
                     else if( branchName == "test" ) {
                         mvnGoals = "deploy"

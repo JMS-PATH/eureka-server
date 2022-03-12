@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
+		<snyk.version>2.0.0</snyk.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,6 +28,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.snyk</groupId>
+			<artifactId>snyk-maven-plugin</artifactId>
+			<version>${snyk.version}</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -59,6 +66,32 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.snyk</groupId>
+				<artifactId>snyk-maven-plugin</artifactId>
+				<version>${snyk.version}</version>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>snyk-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>snyk-monitor</id>
+						<goals>
+							<goal>monitor</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<apiToken>94d7a5ec-2b70-42d0-9425-e768cbcd03ba</apiToken>
+					<args>
+						<arg>--all-projects</arg>
+					</args>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
