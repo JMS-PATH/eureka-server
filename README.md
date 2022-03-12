@@ -6,4 +6,4 @@ Eureka Server for service discovery
 ![](https://raw.githubusercontent.com/JMS-PATH/eureka-server/main/ci-cd-pipeline-view.JPG?token=GHSAT0AAAAAABRQ6RZRD5SHNDEK2R3OHGSUYRMWRUA)
 
 ---
-<center>DevSecOps ✔️</center>
+<p align="center"> DevSecOps ✔️ </p>
