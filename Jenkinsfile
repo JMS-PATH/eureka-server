@@ -1,6 +1,8 @@
 def version
-def dockerHubImg = "aswinrprasad/eureka"
-def dockerGitImg = "ghcr.io/jms-path/eureka-server/eureka"
+def appName = 'eureka-server'
+def imgName = 'eureka'
+def dockerHubImg = "aswinrprasad/${imgName}"
+def dockerGitImg = "ghcr.io/jms-path/${appName}/${imgName}"
 def branchName = env.BRANCH_NAME
 
 pipeline {
@@ -47,7 +49,12 @@ pipeline {
         stage("Scan Open Source Libraries with Snyk") {
             steps {
                 echo "Scanning all open source library jar files with snyk"
-                sh "mvn install snyk:monitor"
+                snykSecurity(
+                  snykInstallation: 'snyk-scanner',
+                  snykTokenId: '94d7a5ec-2b70-42d0-9425-e768cbcd03ba',
+                  projectName: '${appName}',
+                  failOnIssues: false
+                )
             }
         }
 
@@ -56,7 +63,7 @@ pipeline {
                 echo "Scanning code quality with SonarQube"
                 script {
                     withSonarQubeEnv(credentialsId: 'sonarqube-credentials', installationName: 'sonar-scanner') {
-                        sh 'mvn sonar:sonar -Dsonar.projectName=eureka-server'
+                        sh 'mvn sonar:sonar -Dsonar.projectName=${appName}'
                     }
                 }
             }
