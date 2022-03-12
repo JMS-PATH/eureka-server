@@ -20,7 +20,7 @@ pipeline {
                     mvnGoals = "install"
                     if( branchName == "main" ) {
                         version = version.replace("-SNAPSHOT", "")
-                        mvnGoals = "deploy versions:set -DremoveSnapshot=true"
+                        mvnGoals = "versions:set -DremoveSnapshot=true deploy"
                     }
                     else if( branchName == "test" ) {
                         mvnGoals = "deploy"
@@ -42,6 +42,10 @@ pipeline {
                 echo "Building Maven Project"
                 sh "mvn clean compile"
             }
+        }
+
+        stage("Scan Open Source Libraries with Snyk") {
+
         }
 
         stage("Sonar Code Quality Scan") {
