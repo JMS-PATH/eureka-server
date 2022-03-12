@@ -52,7 +52,7 @@ pipeline {
                 snykSecurity(
                   snykInstallation: 'snyk-scanner',
                   snykTokenId: 'snyk-credentials',
-                  projectName: '${appName}',
+                  projectName: appName,
                   failOnIssues: false
                 )
             }
