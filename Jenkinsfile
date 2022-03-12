@@ -47,6 +47,7 @@ pipeline {
         stage("Scan Open Source Libraries with Snyk") {
             steps {
                 echo "Scanning all open source library jar files with snyk"
+                sh "mvn snyk:monitor"
             }
         }
 
