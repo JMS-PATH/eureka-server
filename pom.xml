@@ -45,12 +45,12 @@
 		<repository>
 			<id>maven-releases</id>
 			<name>Eureka Maven Releases</name>
-			<url>http://apache/nexus/repository/maven-releases/</url>
+			<url>http://nexus:8081/nexus/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>maven-snapshots</id>
 			<name>Eureka Maven Snapshots</name>
-			<url>http://apache/nexus/repository/maven-snapshots/</url>
+			<url>http://nexus:8081/nexus/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
