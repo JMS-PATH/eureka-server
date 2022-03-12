@@ -83,14 +83,14 @@ pipeline {
                     if (branchName == "main") {
                         // For DockerHub
                         sh "docker tag ${dockerHubImg}:${version} ${dockerHubImg}:stable"
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'uname', usernameVariable: 'pass')]) {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pass', usernameVariable: 'uname')]) {
                             sh "docker login -u ${uname} -p ${pass}"
                             sh "docker push ${dockerHubImg}:stable"
                             sh "docker push ${dockerHubImg}:${version}"
                         }
 
                         // For GitHub
-                        withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'uname', usernameVariable: 'pass')]) {
+                        withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'pass', usernameVariable: 'uname')]) {
                             sh "docker login -u ${uname} -p ${pass} ghcr.io"
                             sh "docker tag ${dockerGitImg}:${version} ${dockerGitImg}:stable"
                             sh "docker push ${dockerGitImg}:stable"
@@ -99,18 +99,18 @@ pipeline {
                     }
                     else if(branchName == "test"){
                         // For dockerHub
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'uname', usernameVariable: 'pass')]) {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pass', usernameVariable: 'uname')]) {
                             sh "docker login -u ${uname} -p ${pass}"
                             sh "docker push ${dockerHubImg}:${version}"
                         }
                         // For GitHub
-                        withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'uname', usernameVariable: 'pass')]) {
+                        withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'pass', usernameVariable: 'uname')]) {
                             sh "docker login -u ${uname} -p ${pass} ghcr.io"
                             sh "docker push ${dockerGitImg}:${version}"
                         }
                     }
                     else {
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'uname', usernameVariable: 'pass')]) {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'pass', usernameVariable: 'uname')]) {
                             sh "docker login -u ${uname} -p ${pass}"
                             sh "docker push ${dockerHubImg}:${version}"
                         }
