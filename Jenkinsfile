@@ -11,7 +11,9 @@ pipeline {
     tools {
         maven "M3"
     }
-
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "10", artifactNumToKeepStr: "10"))
+    }
     stages {
         stage("Initialize Pipeline"){
             steps {
