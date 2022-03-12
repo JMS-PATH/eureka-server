@@ -6,4 +6,4 @@ COPY ${JAR_FILE} app.jar
 EXPOSE 8095
 
 ENTRYPOINT ["java","-jar","/app.jar"]
-HEALTHCHECK --interval=25s CMD wget --spider http://localhost:8095/actuator/health || exit 1
+HEALTHCHECK --interval=25s CMD curl --fail http://localhost:8095/ || exit 1
