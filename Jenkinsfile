@@ -118,5 +118,11 @@ pipeline {
                 }
             }
         }
+
+        stage("Docker Image Clean Up after Build") {
+            steps {
+                sh "docker image prune -af"
+            }
+        }
     }
 }
