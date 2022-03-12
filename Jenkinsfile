@@ -51,7 +51,7 @@ pipeline {
                 echo "Scanning all open source library jar files with snyk"
                 snykSecurity(
                   snykInstallation: 'snyk-scanner',
-                  snykTokenId: '94d7a5ec-2b70-42d0-9425-e768cbcd03ba',
+                  snykTokenId: 'snyk-credentials',
                   projectName: '${appName}',
                   failOnIssues: false
                 )
