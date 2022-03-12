@@ -76,14 +76,17 @@ pipeline {
 
         stage("Deploy image to DockerHub and GitHub"){
             steps {
+
                 sh "docker build -t ${dockerHubImg}:${version} ."
                 sh "docker tag ${dockerHubImg}:${version} ${dockerGitImg}:${version}"
                 script{
                     if (branchName == "main") {
                         // For DockerHub
                         sh "docker tag ${dockerHubImg}:${version} ${dockerHubImg}:stable"
-                        sh "docker push ${dockerHubImg}:stable"
-                        sh "docker push ${dockerHubImg}:${version}"
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'uname', usernameVariable: 'pass')]) {
+                            sh "docker push ${dockerHubImg}:stable"
+                            sh "docker push ${dockerHubImg}:${version}"
+                        }
 
                         // For GitHub
                         sh "docker tag ${dockerGitImg}:${version} ${dockerGitImg}:stable"
